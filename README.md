@@ -36,18 +36,18 @@ Legend:
 
 | Capability | Ploi | Forge | cPanel | EasyPanel | Overall gap |
 | --- | --- | --- | --- | --- | --- |
-| App deployment | Yes | Yes | Partial | Yes | Low |
+| App deployment | Yes | Yes | Yes | Yes | Low |
 | Domain management | Yes | Yes | Yes | Yes | Low |
 | SSL certificates | Yes | Yes | Yes | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
-| Environment variables | Yes | Partial | Partial | Yes | Medium |
+| Environment variables | Yes | Partial | Yes | Yes | Medium |
 | Queue / worker management | Yes | Yes | No | Partial | Medium |
-| Cron / scheduled jobs | Yes | Partial | Partial | Partial | Medium |
-| Preview environments | Partial | Partial | No | Partial | High |
+| Cron / scheduled jobs | Yes | Partial | Yes | Partial | Medium |
+| Preview environments | Partial | Partial | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
-| Rollbacks | Partial | Partial | No | Partial | High |
-| Logs / runtime status | Partial | Partial | No | Partial | High |
+| Rollbacks | Partial | Partial | Yes | Partial | Medium |
+| Logs / runtime status | Partial | Partial | Yes | Partial | Medium |
 
 ## Strategic observations
 
