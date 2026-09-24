@@ -38,16 +38,16 @@ Legend:
 | --- | --- | --- | --- | --- | --- |
 | App deployment | Yes | Partial | Yes | Yes | Medium |
 | Domain management | Yes | Yes | Yes | Yes | Low |
-| SSL certificates | Yes | No | Yes | Partial | Medium |
-| Database provisioning | Yes | No | Yes | No | High |
-| Environment variables | Yes | No | Yes | Yes | Medium |
-| Queue / worker management | Yes | No | No | No | High |
-| Cron / scheduled jobs | Yes | No | Yes | No | High |
+| SSL certificates | Yes | Yes | Yes | Yes | Low |
+| Database provisioning | Yes | Yes | Yes | Yes | Low |
+| Environment variables | Yes | Yes | Yes | Yes | Low |
+| Queue / worker management | Yes | Yes | No | No | Medium |
+| Cron / scheduled jobs | Yes | Yes | Yes | No | Medium |
 | Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
 | Rollbacks | Partial | No | Yes | No | High |
-| Logs / runtime status | Partial | No | Yes | Partial | Medium |
+| Logs / runtime status | Partial | Yes | Yes | Partial | Medium |
 
 ## Strategic observations
 
