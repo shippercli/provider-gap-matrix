@@ -42,7 +42,7 @@ Legend:
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
 | Queue / worker management | Yes | Yes | No | Partial | Medium |
-| Cron / scheduled jobs | Yes | Yes | Yes | No | Medium |
+| Cron / scheduled jobs | Yes | Yes | Yes | Partial | Medium |
 | Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
