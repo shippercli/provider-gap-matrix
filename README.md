@@ -41,7 +41,7 @@ Legend:
 | SSL certificates | Yes | Yes | Yes | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
-| Queue / worker management | Yes | Yes | No | No | Medium |
+| Queue / worker management | Yes | Yes | No | Partial | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | No | Medium |
 | Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
