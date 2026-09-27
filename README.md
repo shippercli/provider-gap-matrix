@@ -41,6 +41,7 @@ Legend:
 | SSL certificates | Yes | Yes | Yes | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
+| Server lifecycle | Partial | Yes | No | No | Medium |
 | PHP runtime configuration | Yes | Yes | No | No | Medium |
 | Custom NGINX configuration | Yes | Yes | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
