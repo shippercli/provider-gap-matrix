@@ -46,6 +46,8 @@ Legend:
 | Queue / worker management | Yes | Yes | No | Yes | Low |
 | Daemon / process supervision | Yes | Yes | No | Yes | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
+| App resource limits | No | No | No | Yes | Medium |
+| Service mounts | No | No | No | Yes | Medium |
 | Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
