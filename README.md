@@ -38,22 +38,22 @@ Legend:
 | --- | --- | --- | --- | --- | --- |
 | App deployment | Yes | Partial | Yes | Yes | Medium |
 | Domain management | Yes | Yes | Yes | Yes | Low |
-| SSL certificates | Yes | Yes | Yes | Yes | Low |
+| SSL certificates | Yes | Yes | Partial | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
 | Server lifecycle | Partial | No | No | No | High |
-| PHP runtime configuration | Yes | Yes | No | No | Medium |
-| Custom NGINX configuration | Yes | Yes | No | No | Medium |
+| PHP runtime configuration | Yes | No | Yes | No | Medium |
+| Custom NGINX configuration | Yes | No | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
 | Daemon / process supervision | Yes | Yes | No | Yes | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
 | App resource limits | No | No | No | Yes | Medium |
 | Service mounts | No | No | No | Yes | Medium |
-| Preview environments | Partial | No | Yes | Partial | Medium |
+| Preview environments | Partial | Partial | Partial | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
-| Rollbacks | Partial | No | Yes | No | High |
-| Logs / runtime status | Partial | Yes | Yes | Partial | Medium |
+| Rollbacks | Partial | No | Partial | No | High |
+| Logs / runtime status | Partial | Yes | Partial | Partial | Medium |
 
 ## Strategic observations
 
