@@ -36,18 +36,24 @@ Legend:
 
 | Capability | Ploi | Forge | cPanel | EasyPanel | Overall gap |
 | --- | --- | --- | --- | --- | --- |
-| App deployment | Yes | Yes | Yes | Yes | Low |
+| App deployment | Yes | Partial | Yes | Yes | Medium |
 | Domain management | Yes | Yes | Yes | Yes | Low |
 | SSL certificates | Yes | Yes | Yes | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
-| Environment variables | Yes | Partial | Yes | Yes | Medium |
-| Queue / worker management | Yes | Yes | No | Partial | Medium |
-| Cron / scheduled jobs | Yes | Partial | Yes | Partial | Medium |
-| Preview environments | Partial | Partial | Yes | Partial | Medium |
+| Environment variables | Yes | Yes | Yes | Yes | Low |
+| Server lifecycle | Partial | No | No | No | High |
+| PHP runtime configuration | Yes | Yes | No | No | Medium |
+| Custom NGINX configuration | Yes | Yes | No | No | Medium |
+| Queue / worker management | Yes | Yes | No | Yes | Low |
+| Daemon / process supervision | Yes | Yes | No | Yes | Medium |
+| Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
+| App resource limits | No | No | No | Yes | Medium |
+| Service mounts | No | No | No | Yes | Medium |
+| Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
-| Rollbacks | Partial | Partial | Yes | Partial | Medium |
-| Logs / runtime status | Partial | Partial | Yes | Partial | Medium |
+| Rollbacks | Partial | No | Yes | No | High |
+| Logs / runtime status | Partial | Yes | Yes | Partial | Medium |
 
 ## Strategic observations
 
