@@ -41,7 +41,7 @@ Legend:
 | SSL certificates | Yes | Yes | Yes | Yes | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
-| Server lifecycle | Yes | Yes | No | No | Medium |
+| Server lifecycle | Partial | No | No | No | High |
 | PHP runtime configuration | Yes | Yes | No | No | Medium |
 | Custom NGINX configuration | Yes | Yes | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
@@ -49,7 +49,7 @@ Legend:
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
 | App resource limits | No | No | No | Yes | Medium |
 | Service mounts | No | No | No | Yes | Medium |
-| Preview environments | Yes | Yes | Yes | Yes | Low |
+| Preview environments | Partial | No | Yes | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
 | Rollbacks | Partial | No | Yes | No | High |
