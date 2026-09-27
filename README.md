@@ -49,7 +49,7 @@ Legend:
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
 | App resource limits | No | No | No | Yes | Medium |
 | Service mounts | No | No | No | Yes | Medium |
-| Preview environments | Partial | No | Yes | Partial | Medium |
+| Preview environments | Partial | No | Yes | Yes | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
 | Rollbacks | Partial | No | Yes | No | High |
