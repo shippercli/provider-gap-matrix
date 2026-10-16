@@ -43,7 +43,7 @@ absent provider or verified production option.
 
 Legend:
 
-- `Yes`: first-class support should exist
+- `Yes`: implemented by the provider for this feature
 - `Partial`: provider-dependent or uneven
 - `No`: not covered today
 
@@ -59,7 +59,7 @@ on 2026-10-16; these references describe implementation declarations, not live t
 | --- | --- | --- | --- | --- | --- |
 | App deployment | Yes | Partial | Yes | Yes | Medium |
 | Domain management | Yes | Yes | Yes | Yes | Low |
-| SSL certificates | Yes | Yes | Partial | Yes | Low |
+| SSL certificates | Yes | Yes | Partial | Partial | Low |
 | Database provisioning | Yes | Yes | Yes | Yes | Low |
 | Environment variables | Yes | Yes | Yes | Yes | Low |
 | Server lifecycle | Partial | No | No | No | High |
@@ -67,14 +67,28 @@ on 2026-10-16; these references describe implementation declarations, not live t
 | Custom NGINX configuration | Yes | No | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
 | Daemon / process supervision | Yes | Yes | No | No | Medium |
-| Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
-| App resource limits | No | No | No | Yes | Medium |
-| Service mounts | No | No | No | Yes | Medium |
+| Cron / scheduled jobs | Yes | Yes | Yes | Partial | Low |
+| App resource limits | No | No | No | No | High |
+| Service mounts | No | No | No | No | High |
 | Preview environments | Partial | Partial | Partial | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
-| Container image deploys | No | No | No | Partial | High |
+| Container image deploys | No | No | No | Yes | High |
 | Rollbacks | No | No | Partial | No | High |
 | Logs / runtime status | Partial | Yes | Partial | Partial | Medium |
+
+### EasyPanel scope notes
+
+The [provider's version 1 scope](https://github.com/shippercli/provider-easypanel/blob/main/README.md)
+and implementation distinguish panel features from features this provider exposes:
+
+- HTTPS domain bindings delegate certificate issuance and renewal to EasyPanel;
+  the provider does not manage certificate resources directly.
+- Scheduled jobs run as scripts in a managed Box service and require a Git or
+  GitHub source. Image-only application sources do not satisfy that requirement.
+- Resource limits, mounts, and persistent-volume lifecycle are explicitly outside
+  the provider's supported scope, even when available in the EasyPanel UI.
+- Container image sources are implemented directly; that does not imply general
+  multi-service orchestration or the unsupported resource controls above.
 
 ## Strategic observations
 
