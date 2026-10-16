@@ -474,6 +474,36 @@ The drafts remain open: these fixtures do not prove live permissions, database
 authentication, timing, durable credential recovery, legacy migrations or lifecycle
 concurrency. No PR was merged and no live provider operation was performed.
 
+## Provider metadata example verification — 2026-10-16
+
+All five provider `meta.json` files parse as JSON. Their exact config objects were
+loaded through the CLI ConfigLoader and DTOs with synthetic environment values,
+a fixture repository/domain and a local project path, then passed provider
+validation. This verifies configuration shape and interpolation, not account
+credentials, real server IDs, image availability or deployment success.
+
+| Validation source | Revision |
+| --- | --- |
+| provider-forge | `f0c83e73b0d7078f970fa42d9e7b1fd13a8b7f1c` |
+| provider-ploi | `5f5a41920eb5b773ec5a6163e5a4bf41ff23128b` |
+| provider-coolify | `74957e46978731f4c05bb563c5754271309cf5f9` |
+| provider-easypanel | `548f13a835b92c1f05b7ec7e0cb36c3b80a1bde9` |
+| provider-cpanel combined | `225d7e9961b49bddfa1f7bbb9024517b675303f6` |
+
+The Forge example previously omitted required `organization_slug`; it now also
+shows the deployment timeout. The Ploi static-server example lacked `server_id`.
+Coolify's three escaped dollar placeholders made its metadata invalid JSON.
+Regressions reproduced all three defects before correction. EasyPanel's example
+needed no change; a new no-API validation test passes (139 tests / 455 assertions
+in its full suite). cPanel's source metadata matches the combined checkout byte
+for byte; validation used that combined implementation, not an independently
+released package. Its pre-existing untracked CLI fixture was not changed.
+
+The website renders metadata fetched from provider main branches. These audit
+branch examples do not appear there until merged and refreshed. Coolify is not
+currently among the website's four configured provider repositories. No live API
+calls or release/merge actions were performed for these example checks.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
