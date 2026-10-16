@@ -207,6 +207,23 @@ an approving review on its own PRs; an independent reviewer must provide any
 required approval. No PR was merged and no branch protection was changed by
 this review.
 
+### Combined cPanel rollback follow-up
+
+After the journal lock-scope fix at rollback PR #21 source
+`b46b78e290b1959e651d6dc8ea8acbb2d45f3358`, the local combination of cPanel
+PRs #8–#25 at `225d7e9961b49bddfa1f7bbb9024517b675303f6` passed 749 PHP
+tests / 3,363 assertions, 27 Python archive tests, all four HTTP suites
+(522 cases), and extracted Composer distribution verification (28 files).
+The PHP total includes a pre-existing untracked CLI boolean integration test in
+the temporary combined checkout; that test is not part of the rollback PR.
+Standalone rollback PR CI also passed at the stated source commit.
+
+Recovery and cleanup now require the journal's stage identity, home and active
+path to remain bound to the acquired lock. This does not coordinate the remote
+rollback process lock with PHP-driven apply/destroy API sequences. Shared
+lifecycle locking, concurrent path replacement and live account behavior remain
+open. The integration commit is local evidence, not a merged or released package.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
