@@ -360,8 +360,7 @@ atomic multi-database transaction or durable credential journal.
 The current GitHub inventory contains 24 repositories (9 private), 53 open PRs
 (24 ready, 29 draft), and three open issues: contracts #3 (database credential
 delivery), contracts #4 (resource adoption ownership), and CLI #134 (attaching
-an existing Ploi database to another site). Of the open PRs, 52 report a clean
-merge state and cPanel #27 is blocked. This count is a fresh organization-wide
+an existing Ploi database to another site). All 53 currently report a clean merge state. This is a fresh organization-wide
 query; check conclusions below are confirmed for the exact commits listed.
 
 - cPanel draft PRs #8, #11–#16, and #20–#25 now use the protected check names
@@ -376,10 +375,12 @@ query; check conclusions below are confirmed for the exact commits listed.
 - Forge #9 (`a5d1953`), EasyPanel #14 (`ad51f9a`), Ploi #26 (`f8751e0`), and
   Coolify #1 (`36ffadd`) are still drafts with clean checks. Their test and
   mocked-transport evidence does not establish live account behavior.
-- cPanel #27 (`783f504`) passes PHP 8.3–8.5, but remains blocked and has an
-  unresolved safety regression: its `ensureDatabases()` path grants privileges
-  to declared existing databases without explicit adoption consent. The
-  blocking review comment is posted; the issue is not resolved by green CI.
+- cPanel #27 now passes PHP 8.3–8.5 on corrected head `fa4fe65`; its merge
+  state is clean. It restores explicit consent before changing privileges or
+  passwords on existing databases. Local provider tests pass (48 tests / 224
+  assertions); Actions run 38969517407 passes on the exact head. The earlier
+  blocking review finding is addressed, while independent review and live cPanel
+  verification remain outstanding.
 - Ploi #134 remains correctly open: the published API surface documents
   `site_id` during database creation, but no attach-existing operation. The
   provider fails closed when an existing database belongs to another site.
