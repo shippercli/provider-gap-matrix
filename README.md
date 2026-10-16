@@ -148,6 +148,38 @@ Lockfile SHA-256:
 This is a fresh dependency/install integration check with synthetic local HTTP,
 not a live provider deployment, release installation, or proof of all workflows.
 
+### Current provider and combined CLI installation
+
+A subsequent fresh installation on 2026-10-16 rebuilt every Composer ZIP from
+these unreleased audit commits:
+
+| Package | Source commit |
+| --- | --- |
+| Forge | `77d7d034c643d0f07a1ee479ff6120463c3d445c` |
+| Ploi | `f602b8b3a3f5dfa144e0ca9d442e5956a5bfb921` |
+| EasyPanel | `0db2b80f70cf18d4695f1320731bd3bb8d68788c` |
+| Coolify | `5cbe7e2b283d20f70dcb6ad0acaa392f11e2d4fa` |
+| CLI, local combination of PRs #152–#158 | `c2e472880da6e65d828f8979239ab4ab9606ee1a` |
+
+The new solve installed 84 production packages without development dependencies,
+plugins or scripts. Under PHP 8.4.15 with host configuration disabled, all 27
+provider runtime classes loaded from the installed packages; all four plugin
+registrations, capability manifests, CLI provider discovery/adaptation, empty
+configuration parsing and CLI version startup passed. Composer metadata contained
+none of PHPUnit, Pest, Mockery, Pint or PHPStan. The locked dependency audit
+reported no advisories or abandoned packages.
+
+All seven current local HTTP suites passed against this installed dependency
+graph: Forge responses, Ploi responses, EasyPanel responses, and Coolify error
+diagnostics, inventory shapes, database environment delivery and retries.
+The harnesses load the installed vendor autoloader and use local HTTP fixtures.
+They do not verify live provider accounts, database connectivity or all deployment
+workflows. The combined CLI commit is local integration evidence; its PRs remain
+unmerged.
+
+Lockfile SHA-256:
+`715eb247f661490ba1f1c3f5285555b3298c0a34205d1cde0902518ce6c19555`.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
