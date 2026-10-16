@@ -284,6 +284,27 @@ all have passing required checks and clean merge states. A user merge decision
 has been requested for only these corrections; no default branch or protection
 setting has been changed by this review.
 
+### Website preview and credential follow-up
+
+Website PR #11 at `ae76013` passes 42 Node tests, six built-output verifier tests,
+TypeScript and the 77-route production build. Checks cover local links across
+73 HTML pages and 300-second revalidation for all 17 provider routes. Runtime
+metadata shape/slug checks and complete fetch-cache tracking are included.
+The exact successful Vercel preview (deployment 7123642288) was fetched through
+the connected authenticated Vercel tool: homepage, provider listing/detail,
+Forge configuration, database docs and specs returned 200 with expected
+server-rendered content; an unknown docs route returned 404. Preview responses
+have noindex. Protection settings were not changed. Browser interaction and live
+cache expiry remain unverified; unmerged docs changes are not yet published.
+
+Current explicit-password and complete-input fixes are green in CI at Forge
+`41ee587` (209 tests / 511 assertions; 225 HTTP requests), Ploi `c71fa32`
+(262 / 977; 168 HTTP requests) and EasyPanel `b9960eb` (137 / 448; 241 HTTP
+requests). They cover unchanged selected secret bytes, preflight refusal and
+complete environment parsing. They do not prove live API provisioning or
+database connectivity. Docs PR #4 at `3e573d2` has green content CI; its exact
+password example loads through real CLI DTOs and all three selection paths.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
