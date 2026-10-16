@@ -90,6 +90,63 @@ and implementation distinguish panel features from features this provider expose
 - Container image sources are implemented directly; that does not imply general
   multi-service orchestration or the unsupported resource controls above.
 
+## Correctness and release evidence
+
+The following is an audit snapshot from 2026-10-16. These are pending changes and
+observed checks, not a claim that the fixes are in published releases. Green CI,
+readable package metadata, and a declared capability do not prove a deployment
+works against a live provider account.
+
+| Area under review | Evidence obtained | Still required |
+| --- | --- | --- |
+| [CLI PRs #152–#157](https://github.com/shippercli/cli/pull/152) | Combined source built as a production PHAR; startup/help outside checkout and 56 boolean parsing checks pass. A fresh Composer installation discovers and adapts all four provider plugins. | Review and release the compatible changes together; verify provider operations with actual accounts. The PHAR cannot discover separately installed Composer plugins. |
+| [Forge #9](https://github.com/shippercli/provider-forge/pull/9) | 60 unit tests / 178 assertions; actual Guzzle redirect/error checks; PHP 8.3–8.5 CI and protected aggregate gate pass; distribution archive checks pass. | Live creation, existing-resource ownership, credential delivery, deployment/runtime, and cleanup verification. |
+| [Ploi #26](https://github.com/shippercli/provider-ploi/pull/26) | 79 unit tests / 441 assertions; actual SDK resource routing, token rotation and HTTP rejection checks; PHP 8.3–8.5 CI and distribution checks pass. | Live lifecycle verification; attaching an existing database to a different site still needs a documented Ploi API operation. |
+| [EasyPanel #14](https://github.com/shippercli/provider-easypanel/pull/14) | 40 unit tests / 217 assertions; real cURL status/credential-diagnostic checks; PHP 8.3–8.5 CI and distribution checks pass. | Live application/database/workload health, ownership transitions, and cleanup verification. |
+| [Coolify #1](https://github.com/shippercli/provider-coolify/pull/1) | 149 unit tests / 842 assertions; three actual HTTP regressions; real CLI configuration objects tested with fake API transport; PHP 8.3–8.5 CI and distribution checks pass. | Unreleased implementation; live authentication, deployment/runtime, previews, mutations and legacy ownership migration remain unverified. |
+| [cPanel cleanup #22](https://github.com/shippercli/provider-cpanel/pull/22) and [rollback #21](https://github.com/shippercli/provider-cpanel/pull/21) | Combined audit branches pass 719 tests / 3,327 assertions. Cleanup validates ancestor metadata before trash and inventory after trash. Staged rollback/recovery and packaged helper checks have local regressions. | Shared apply/destroy/rollback locking; concurrent path replacement; live Python/cPanel behavior and account permissions. API observations are not no-follow filesystem handles or a transaction. |
+| [Website #11](https://github.com/shippercli/website/pull/11) | Nine tests; webpack production build creates 77 pages; Chrome verifies pause and manual provider advancement. | Browser execution with denied storage/reduced motion, production rendering and content accuracy. Local default Turbopack build hit a worker-port permission restriction. |
+
+### Fresh production installation
+
+A separate Composer consumer installed the four provider ZIPs and the combined
+CLI source archive with production dependencies only, using local `dev-audit`
+package metadata. On PHP 8.4 with normal ini configuration disabled to exclude
+Herd's debug autoloader, all 27 provider runtime classes loaded from installed
+packages, plugin capability manifests validated, and the installed CLI's real
+registry/factory discovered and adapted every provider. All six provider HTTP
+regression scripts passed against this dependency installation. The resulting
+84-package graph had no reported vulnerability advisories at observation time.
+
+The tested provider source heads were Forge `6e49422`, Ploi `1868ed7`, EasyPanel
+`5f6e2be`, and Coolify `241d5ba`; the local combined CLI head was `5c25c37`.
+This verifies packaging/bootstrap compatibility locally on PHP 8.4. It does not
+replace deployment checks or establish that a release already contains these
+changes. Individual provider CI also checks PHP 8.3 and 8.5; the fresh combined
+consumer install has not been repeated on those versions.
+
+### Open correctness issues
+
+- [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
+  generated connection values must reach the application, with distinct database
+  mappings and explicit environment precedence. Unknown existing passwords must
+  not be invented or silently rotated. Local/mock evidence exists; live database
+  connectivity and migration behavior remain open.
+- [Ownership, contracts #4](https://github.com/shippercli/contracts/issues/4):
+  exact ownership and complete readable inventories must precede inferred
+  mutation/deletion. Response identity checks and refusal paths improve safety;
+  concurrent changes, legacy migration, and live lifecycle checks remain open.
+- [Existing Ploi database association, CLI #134](https://github.com/shippercli/cli/issues/134):
+  refusing a database attached to another site avoids false success but does not
+  satisfy the requested attach-existing acceptance criterion. Keep the issue open
+  until a documented operation can be implemented and tested.
+
+Before treating an audited provider as release-ready, verify its actual
+create/reapply/deploy/runtime/status/logs/cleanup flow, existing-resource refusal
+and adoption boundaries, generated database connectivity, failed/partial
+operations, and supported preview/rollback behavior. Complete reviews and
+release integration remain necessary even when local tests and CI pass.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
