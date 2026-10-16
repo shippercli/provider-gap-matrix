@@ -412,6 +412,36 @@ a hosted-preview browser run, a full accessibility audit or live CDN revalidatio
 evidence. Hosted-preview HTTP checks remain separate. The evidence is also
 recorded on [website PR #11](https://github.com/shippercli/website/pull/11).
 
+## Current review disposition — 2026-10-16
+
+The refreshed organization inventory contains 51 open PRs. After completing the
+documentation readiness review, 22 are ready for review and 29 remain draft.
+No failed checks were reported in the inventory snapshot. The three open issues
+remain contracts #3 (credential delivery), contracts #4 (ownership) and CLI #134
+(existing Ploi database association).
+
+- CLI #152–159 remain ready, with combined local integration and production-package
+  evidence recorded above. This does not merge the branches or publish a release.
+- Website #11 is ready at `8e55b000c7f2f362202c466b0d32808bb0ec225b`;
+  current-head CI/Vercel checks pass. Mobile browser regressions exposed and then
+  verified fixes for overflowing cards and duplicate index titles. Fresh local
+  production browser checks passed at widths 320 and 390.
+- Docs #4 is now ready at `a6febdbfa57bbffc9fee48b706a300807ad0ecdb` after
+  source validation, exact YAML/provider-selection checks and candidate rendering.
+  Its readiness applies to documentation, not live provider acceptance.
+- Specs #6 is ready and adds readable source summaries plus Ploi, deploy-command
+  and test-coverage source reconciliation. Current-head content CI passes at
+  `547303cd` (abbreviated revision); historical bodies elsewhere still need review.
+- cPanel #26, contracts #6 and capability-spec #3 are reviewed CI-name corrections
+  awaiting the previously requested merge decision. Other ready PRs blocked by
+  those required context names must not be described as failing their tests.
+- Provider implementation drafts remain draft because full live lifecycle,
+  credential connectivity/recovery, legacy migration and concurrency acceptance
+  is incomplete. The shared contracts/capability proposals remain open drafts.
+
+Ready status means a change is reviewable; it is not an approval, merge, release,
+or proof that the whole audit is complete. No PR was merged during this review.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
