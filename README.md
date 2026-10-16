@@ -442,6 +442,38 @@ remain contracts #3 (credential delivery), contracts #4 (ownership) and CLI #134
 Ready status means a change is reviewable; it is not an approval, merge, release,
 or proof that the whole audit is complete. No PR was merged during this review.
 
+## Deployment follow-up production integration — 2026-10-16
+
+A new production-only consumer verified these source revisions together:
+
+| Package | Source revision |
+| --- | --- |
+| provider-forge | `3afcd4fc1a162c09eadcf33d4ae19d9dfd1fd6c8` |
+| provider-ploi | `059b6c72d4e9af76a33cfbb7a496947f95394143` |
+| provider-easypanel | `5c6e08cdf67962d7a8d7fbd7ddb45591ea837c42` |
+| provider-coolify | `5092466077004c0157df829172670c96c9ed6571` |
+| cli | `e16ba2b58b643e2de0272fe665d03f201db811ed` |
+| contracts | `fe08db9199dd473d8de494dfa230fa53fc8bb446` |
+
+All seven SDK HTTP suites passed using installed package code/dependencies, with
+278 Forge requests, 214 Ploi requests and 244 EasyPanel requests plus all four
+Coolify suites. The tested Forge client now waits for its exact created deployment
+ID to finish; Ploi validates trigger acknowledgments, site identity/states and
+monotonic deadlines. Ploi unique current-deployment correlation remains open.
+EasyPanel rejects incomplete ownership evidence through serialized cleanup paths.
+
+Installation used 84 production dependencies and `--no-dev --no-plugins
+--no-scripts`. The contracts version alias is only a compatibility fixture. Six
+archives passed forbidden-content inspection. PHP `-n` verified 27 provider
+runtime classes, 12 contract types, four registrations/manifests, CLI discovery,
+configuration loading and startup through Composer's bin proxy. Lock SHA-256:
+`1f8285856d486b205712dc8438610167c1ad74a532bbbaf3d1470a1634df2aa2`.
+
+The provider PRs now carry formal comment reviews of this combined evidence.
+The drafts remain open: these fixtures do not prove live permissions, database
+authentication, timing, durable credential recovery, legacy migrations or lifecycle
+concurrency. No PR was merged and no live provider operation was performed.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
