@@ -327,6 +327,36 @@ and adoption boundaries, generated database connectivity, failed/partial
 operations, and supported preview/rollback behavior. Complete reviews and
 release integration remain necessary even when local tests and CI pass.
 
+## Provider follow-up snapshot — 2026-10-16
+
+This snapshot supplements the earlier audit evidence; these changes remain in
+open PRs and are not evidence of a released or live-tested deployment.
+
+| Provider PR | Reviewed head | Follow-up evidence |
+| --- | --- | --- |
+| [Forge #9](https://github.com/shippercli/provider-forge/pull/9) | `c92544fa303a4000a5685eed9f70c1106bae10f2` | 228 tests / 575 assertions; 247 local HTTP requests; current-head CI successful. Validates the actual server database engine against declarations and delivers confirmed connections before later database creation. |
+| [Ploi #26](https://github.com/shippercli/provider-ploi/pull/26) | `5674a0e5da8241285d6b3b5656dcf0dd7c1a9822` | 275 tests / 1,047 assertions; 192 local HTTP requests; current-head CI successful. Each confirmed connection is merged into the site environment and read back before provisioning continues. A stateful SDK fixture verifies fresh retry creates only the missing database and retains both passwords and unrelated environment content. |
+| [EasyPanel #14](https://github.com/shippercli/provider-easypanel/pull/14) | `71e9130e21c80df522d5aa2d78a7798d2383b6d2` | 137 tests / 449 assertions; 241 local HTTP requests; current-head CI successful. Corrected four test assertion scopes that could accidentally catch their own failures; a disabled source guard reproduced the previous false pass. |
+| [Coolify #1](https://github.com/shippercli/provider-coolify/pull/1) | `5092466077004c0157df829172670c96c9ed6571` | Current-head CI successful. Packaging exclusions are verified at nested paths; earlier runtime evidence remains scoped to its recorded source heads. |
+
+Forge's engine check follows the official create-database/server contract; it
+does not send an invented per-schema engine field. Ploi rejects unsupported
+non-SQL declaration types locally, but actual existing-server engine matching
+remains unverified. Accepted labels alone do not prove server compatibility.
+
+Ploi's partial-provisioning regression failed before the delivery fix. Its fresh
+retry fixture checks the sequence `create:main`, delivery, failed
+`create:analytics`, retry `create:analytics`, delivery. This is a simulated API
+through the real SDK, not live database connectivity. Failed or ambiguous
+creation/storage still requires durable recovery; neither provider has an
+atomic multi-database transaction or durable credential journal.
+
+The refreshed organization inventory contains **50 open PRs** (20 ready for
+review, 30 draft) and the same three open issues: contracts #3, contracts #4,
+and CLI #134. No failed checks were reported in that snapshot. Check success
+alone does not approve a PR or establish release readiness. Protected-branch
+check-name corrections still await the requested merge decision.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
