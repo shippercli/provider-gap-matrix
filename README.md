@@ -6,12 +6,25 @@ Map current provider coverage, identify missing deployment models, and clarify w
 
 ## Current providers
 
+This is a capability inventory, not proof of a successful live deployment. Read
+each provider's manifest and limitations before choosing it; pending audit PRs
+do not establish behavior in an installed release.
+
 | Provider | Category | Primary model |
 | --- | --- | --- |
 | Ploi | Server panel | Managed VPS / server deployments |
 | Laravel Forge | Server panel | Laravel-oriented server deployments |
 | EasyPanel | App/server panel | Managed application and service deployments |
 | cPanel | Shared hosting panel | Shared hosting deployments |
+
+Coolify also has an implementation in
+[shippercli/provider-coolify](https://github.com/shippercli/provider-coolify).
+As checked on 2026-10-16, its default branch is
+`wip/workspace-handoff-2026-10-08` and the repository has no version tags.
+Its application, service, database, and preview behavior is under audit in
+[PR #1](https://github.com/shippercli/provider-coolify/pull/1). Track it as an
+implementation awaiting release and lifecycle verification, rather than as an
+absent provider or verified production option.
 
 ## Coverage by deployment model
 
@@ -22,7 +35,7 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | Generic SSH / raw server | No | None | High |
 | PaaS app platform | No | None | High |
 | Frontend / static platform | No | None | High |
-| Container-native platform | No | None | High |
+| Container-native platform | Partial | EasyPanel; Coolify implementation under audit | High |
 | Kubernetes | No | None | High |
 | Preview-environment-first platform | No | None | Medium |
 
@@ -33,6 +46,14 @@ Legend:
 - `Yes`: first-class support should exist
 - `Partial`: provider-dependent or uneven
 - `No`: not covered today
+
+Rows describe provider-specific features; a broad capability declaration does
+not imply every subfeature is implemented. In particular, queue workers do not
+establish daemon supervision, and deployment history does not establish rollback.
+The Ploi rollback and EasyPanel workload entries were checked against their
+[Ploi manifest](https://github.com/shippercli/provider-ploi/blob/main/src/PloiProvider.php)
+and [EasyPanel manifest](https://github.com/shippercli/provider-easypanel/blob/main/src/EasyPanelProvider.php)
+on 2026-10-16; these references describe implementation declarations, not live tests.
 
 | Capability | Ploi | Forge | cPanel | EasyPanel | Overall gap |
 | --- | --- | --- | --- | --- | --- |
@@ -45,14 +66,14 @@ Legend:
 | PHP runtime configuration | Yes | No | Yes | No | Medium |
 | Custom NGINX configuration | Yes | No | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
-| Daemon / process supervision | Yes | Yes | No | Yes | Medium |
+| Daemon / process supervision | Yes | Yes | No | No | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
 | App resource limits | No | No | No | Yes | Medium |
 | Service mounts | No | No | No | Yes | Medium |
 | Preview environments | Partial | Partial | Partial | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
 | Container image deploys | No | No | No | Partial | High |
-| Rollbacks | Partial | No | Partial | No | High |
+| Rollbacks | No | No | Partial | No | High |
 | Logs / runtime status | Partial | Yes | Partial | Partial | Medium |
 
 ## Strategic observations
@@ -78,7 +99,7 @@ Legend:
 | Vercel | Frontend, static, edge workflows |
 | Railway | PaaS apps, workers, managed services |
 | Render | PaaS apps, web services, cron jobs |
-| Coolify | Self-managed modern app platform |
+| Complete and verify Coolify | Release the existing self-managed app-platform implementation |
 | Kubernetes | Portable orchestration layer |
 
 ## Messaging implication
