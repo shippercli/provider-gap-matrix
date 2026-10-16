@@ -393,6 +393,25 @@ Live deployments, database connectivity, persistence timing, durable credential
 recovery, cPanel lifecycle concurrency and published-package availability remain
 unverified. No PR was merged for this integration check.
 
+## Website browser verification — 2026-10-16
+
+Website source `ae760136d22dc3a0402697f78427a8c4acc9452e`, existing local
+production build `e1TFLfcLigvXLHTwKNe6b`, was exercised in installed headless
+Google Chrome using bundled Playwright and a local production server. A storage
+getter throwing `SecurityError` was installed before page scripts.
+
+Observed assertions passed: dark system preference fallback, interactive theme
+toggle despite denied storage, reload returning to the system preference,
+reduced-motion suppression of automatic provider rotation, manual Next provider,
+automatic rotation after changing to no-preference, and stopped rotation after
+changing back to reduce. No browser page-error events were reported. The static
+observations spanned more than the two-second rotation interval.
+
+This verifies the existing local build's client behavior. It is not a fresh build,
+a hosted-preview browser run, a full accessibility audit or live CDN revalidation
+evidence. Hosted-preview HTTP checks remain separate. The evidence is also
+recorded on [website PR #11](https://github.com/shippercli/website/pull/11).
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
