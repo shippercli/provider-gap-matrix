@@ -180,6 +180,33 @@ unmerged.
 Lockfile SHA-256:
 `715eb247f661490ba1f1c3f5285555b3298c0a34205d1cde0902518ce6c19555`.
 
+### Organization PR review snapshot, 2026-10-16
+
+A fresh GitHub query inspected all 48 open PRs, including their current head,
+draft state, mergeability, review decision and every reported status check.
+All 136 reported checks were successful; none were pending or failing. GitHub
+reported all 48 heads mergeable without conflicts. There were 18 ready PRs and
+30 drafts. This is a dated observation, not a guarantee for later commits.
+
+Twenty PRs still reported a blocked merge state: cPanel #8–#25, contracts #5
+and capability-spec #2. In cPanel, branch protection requires `CI / PHP 8.3`,
+`CI / PHP 8.4` and `CI / PHP 8.5`, while the older PR workflows report
+`PHP 8.3`, `PHP 8.4` and `PHP 8.5`. The existing one-line
+[cPanel #26](https://github.com/shippercli/provider-cpanel/pull/26) reports all
+three required contexts successfully and has a clean merge state. The analogous
+[contracts #6](https://github.com/shippercli/contracts/pull/6) and
+[capability-spec #3](https://github.com/shippercli/provider-capability-spec/pull/3)
+corrections are also ready with clean merge states. Review those base workflow
+corrections before refreshing dependent PR branches and their checks.
+
+The latest Forge, Ploi, EasyPanel and documentation fixes all have successful
+reported CI at this snapshot. Passing CI and conflict-free mergeability do not
+establish live lifecycle correctness. Drafts retain their documented deployment,
+ownership, credential and concurrency gaps. The author account cannot submit
+an approving review on its own PRs; an independent reviewer must provide any
+required approval. No PR was merged and no branch protection was changed by
+this review.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
