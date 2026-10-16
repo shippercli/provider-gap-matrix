@@ -355,6 +355,39 @@ through the real SDK, not live database connectivity. Failed or ambiguous
 creation/storage still requires durable recovery; neither provider has an
 atomic multi-database transaction or durable credential journal.
 
+### Organization refresh — 2026-10-16
+
+The current GitHub inventory contains 24 repositories (9 private), 53 open PRs
+(24 ready, 29 draft), and three open issues: contracts #3 (database credential
+delivery), contracts #4 (resource adoption ownership), and CLI #134 (attaching
+an existing Ploi database to another site). Of the open PRs, 52 report a clean
+merge state and cPanel #27 is blocked. This count is a fresh organization-wide
+query; check conclusions below are confirmed for the exact commits listed.
+
+- cPanel draft PRs #8, #11–#16, and #20–#25 now use the protected check names
+  `CI / PHP 8.3`, `CI / PHP 8.4`, and `CI / PHP 8.5`. All 13 exact heads pass
+  those checks and remain drafts. Ready cPanel PRs #9, #10, and #17–#19 also
+  pass the required checks; contracts #5/#7 and capability-spec #2 are clean
+  after the matching check-name correction.
+- CLI #160 updates Ploi database guidance and is clean; CLI #155 patches the
+  three currently open Dependabot alerts in `examples/api/composer.lock`, but
+  those alerts remain open until the PR is merged. Website #11 has exact-head
+  CI and Vercel success; no website Dependabot alerts are currently open.
+- Forge #9 (`a5d1953`), EasyPanel #14 (`ad51f9a`), Ploi #26 (`f8751e0`), and
+  Coolify #1 (`36ffadd`) are still drafts with clean checks. Their test and
+  mocked-transport evidence does not establish live account behavior.
+- cPanel #27 (`783f504`) passes PHP 8.3–8.5, but remains blocked and has an
+  unresolved safety regression: its `ensureDatabases()` path grants privileges
+  to declared existing databases without explicit adoption consent. The
+  blocking review comment is posted; the issue is not resolved by green CI.
+- Ploi #134 remains correctly open: the published API surface documents
+  `site_id` during database creation, but no attach-existing operation. The
+  provider fails closed when an existing database belongs to another site.
+
+These are review and check-state observations only. The PRs remain unmerged;
+the issues require implementation work or external API confirmation, and live
+provider verification remains outstanding.
+
 The refreshed organization inventory contains **50 open PRs** (20 ready for
 review, 30 draft) and the same three open issues: contracts #3, contracts #4,
 and CLI #134. No failed checks were reported in that snapshot. Check success
