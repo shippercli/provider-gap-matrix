@@ -357,6 +357,42 @@ and CLI #134. No failed checks were reported in that snapshot. Check success
 alone does not approve a PR or establish release readiness. Protected-branch
 check-name corrections still await the requested merge decision.
 
+## Refreshed production consumer — 2026-10-16
+
+A fresh isolated Composer consumer installed six audited archives with
+`--no-dev --no-plugins --no-scripts` and 84 production dependencies. Contracts
+uses `dev-audit as 1.2.0` solely as a compatibility fixture, not a published release.
+
+| Package | Source revision |
+| --- | --- |
+| provider-forge | `0edfeca779f95212d43f0e72e5d31f7e419ff88f` |
+| provider-ploi | `ed881f4a7df801ba001f53cd0d43a00f55c54ab8` |
+| provider-easypanel | `71e9130e21c80df522d5aa2d78a7798d2383b6d2` |
+| provider-coolify | `5092466077004c0157df829172670c96c9ed6571` |
+| cli | `e16ba2b58b643e2de0272fe665d03f201db811ed` |
+| contracts | `fe08db9199dd473d8de494dfa230fa53fc8bb446` |
+
+Installed-package checks passed with PHP `-n`: 27 provider runtime classes,
+12 contract types, four provider registrations/manifests, CLI discovery/adapters,
+empty-project configuration loading and version startup through Composer's
+`vendor/bin/shipper` proxy. Direct invocation of the nested package executable
+cannot locate the consumer autoloader; the supported Composer proxy succeeds.
+All seven HTTP fixture suites passed against installed dependencies, including
+Forge persistence/raw-envelope checks and Ploi partial retry/final readback.
+Fixtures were verified against their recorded Git heads and kept outside packages.
+
+All six ZIPs were inspected for bundled dependency, development, local-secret
+and build content; no forbidden paths were present. Archives were built from Git
+exports followed by Composer archive; separate package verifiers cover nested
+source-copy exclusion behavior. The combined CLI revision is a local integration
+of the open CLI PRs, not a GitHub merge. Consumer lock SHA-256:
+`bba407215464c177dfd96e1de9dc2f7785f54468a395ef8b625e59bc0e5b5a82`.
+
+This verifies the recorded fixtures run from production-installed packages.
+Live deployments, database connectivity, persistence timing, durable credential
+recovery, cPanel lifecycle concurrency and published-package availability remain
+unverified. No PR was merged for this integration check.
+
 ## Strategic observations
 
 1. Current providers cluster around similar infrastructure assumptions.
