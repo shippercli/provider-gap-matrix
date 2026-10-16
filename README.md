@@ -587,3 +587,22 @@ Fresh Composer audit of the resolved consumer lockfile reports no advisories or 
 EasyPanel now persists and verifies each confirmed database connection before creating another database, and verifies all expected variables after the final app update. Public-flow unit tests cover fresh-provider retry and refused readback; real HTTP covers final-write scenarios, with a negative control proving detection when verification is disabled. Worker/scheduler environment readback, durable crash recovery, ambiguous creation outcomes and live connectivity remain unresolved. cPanel was not installed in this consumer.
 
 Additional independently checked candidates: website Markdown sanitization and reserved section-name navigation fixes; cPanel status/runtime summaries integrated locally with 755 tests / 3,371 assertions and four HTTP suites plus 27 archive tests; Python and Ruby dependency audit CI gates. These do not establish live account readiness or complete the overall audit.
+
+### Production consumer refresh after EasyPanel worker and scheduler readback
+
+The previous consumer check is superseded for EasyPanel by this fresh build. Six committed ZIP archives were installed with `--no-dev --no-plugins --no-scripts`; PHP ran through the isolated `-n` wrapper. Exact package heads:
+
+| Package | Commit |
+| --- | --- |
+| provider-forge | `0cf66004deb328aedf28e3da590f4ebf21c792ce` |
+| provider-ploi | `4ea0d6f5d2bf33a6a098cc68b6b7cefa9cf9930a` |
+| provider-easypanel | `dbfc66438c39a5fe6ec5b12c48aca722809c79b5` |
+| provider-coolify | `36ffadd5e835a7354ac54167ebf004b4952d7370` |
+| cli | `e16ba2b58b643e2de0272fe665d03f201db811ed` |
+| contracts | `fe08db9199dd473d8de494dfa230fa53fc8bb446` |
+
+Runtime loading (27 classes), contract reflection (12 types), all four provider adapters, empty-project configuration loading and CLI startup passed. All ten HTTP fixture suites passed against the installed packages, including EasyPanel database/final-app and worker/scheduler environment readbacks. The worker/scheduler suite covers successful and refused/malformed/missing readbacks and confirms failed verification blocks the follow-on workload trigger. The bundled PHP 8.3–8.5 CI jobs passed on EasyPanel PR #14 at this head.
+
+Composer audit of the resolved lockfile reported zero advisories and zero abandoned packages. Lock SHA-256: `be9aed598149c2781238a6edbe68ab3aa0bc16c51637394c194b98878d7bde44`. Local evidence directory: `/var/folders/hs/hh8zts3j2bx_m9649bfhwkc40000gn/T/shipper-production-verified-rrmckmeh` (source/archive manifest, verification results, audit and install log).
+
+These fixtures do not prove live EasyPanel API behavior or workload health. Durable crash recovery, ambiguous creation outcomes and live connectivity remain unverified; cPanel is not included in this consumer. No PR was merged and no live resources were changed.
