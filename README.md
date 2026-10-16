@@ -251,6 +251,39 @@ Consumer lock SHA-256:
 `f68c468c1f5f5a32b2b203e57431b597618e899eb65e210940e4b36343c46360`.
 This remains unreleased integration evidence and does not verify live deployment.
 
+### Nested package exclusions follow-up
+
+Direct archive-content fixtures exposed nested local files that root-only
+exclusions did not remove. The current provider audit heads extend Composer
+exclusions to nested vendor/node_modules, environment/auth files and build
+outputs. Each fixture failed before the exclusion change and passes afterward;
+required source files and extracted runtime classes remain verified. Current
+provider PR CI is green at Forge `bf092bc`, Ploi `fdf1b0a`, EasyPanel `959c1a8`
+and Coolify `5092466`. These are packaging-only follow-ups to the consumer
+verification above, not a new live deployment claim.
+
+[Contracts #7](https://github.com/shippercli/contracts/pull/7) supplies equivalent
+exclusions and content checks. Its 18-file archive at `fe08db9` was installed in
+a fresh 84-dependency consumer alongside the corrected CLI and four providers.
+All 12 contract types, 27 provider runtime classes, registrations, CLI discovery,
+startup and seven HTTP suites passed. Installed content was checked directly
+for forbidden nested files in all six Shipper packages. The fixture explicitly
+aliased the development contracts version to satisfy existing 1.2 constraints;
+it does not claim that the fix is published. Contracts #7 CI passes on PHP
+8.3–8.5, but the protected check-name mismatch still blocks its merge.
+
+cPanel rollback PR #21 at `5c491d4` also excludes credentials and nested
+dependencies. Its expanded package test first reproduced a bundled synthetic
+.env file; the corrected 17-file archive still schedules its extracted helper.
+The standalone branch passes 27 archive tests and 62 PHP tests / 301 assertions.
+Shared lifecycle locking and live account checks remain open.
+
+The three existing one-line CI-name correction PRs (cPanel #26, contracts #6,
+capability-spec #3) were rechecked against the actual protected contexts and
+all have passing required checks and clean merge states. A user merge decision
+has been requested for only these corrections; no default branch or protection
+setting has been changed by this review.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
