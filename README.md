@@ -224,6 +224,33 @@ rollback process lock with PHP-driven apply/destroy API sequences. Shared
 lifecycle locking, concurrent path replacement and live account behavior remain
 open. The integration commit is local evidence, not a merged or released package.
 
+### CLI archive correction and clean consumer verification
+
+Earlier absence-of-development-dependency checks inspected the consumer root's
+Composer metadata. That did not detect the CLI ZIP's bundled checkout `vendor`
+tree. The pre-fix CLI archive contained 7,956 files / 112,788,021 uncompressed
+bytes, including PHPUnit, Pest and analysis dependencies. Those earlier checks
+prove dependency resolution, not absence of bundled dependency copies.
+
+[CLI #159](https://github.com/shippercli/cli/pull/159) adds archive exclusions and
+an archive-content regression. Combined locally with CLI #152–#158 at
+`e16ba2b58b643e2de0272fe665d03f201db811ed`, it passes 213 tests / 585 assertions.
+The CI merge conflict was resolved locally by retaining both the dependency
+audit and archive verification steps. The resulting ZIP contains 151 files /
+1,228,535 uncompressed bytes. Direct archive and installed-tree inspection finds
+no nested vendor/node_modules, tests, CI or build directories, environment files,
+auth.json or box.phar. PR #159 CI passes on PHP 8.3–8.5.
+
+A new consumer installed that archive with the current four provider archives
+and 84 production dependencies. Plugin registration, all 27 runtime classes,
+CLI discovery/adaptation, empty configuration, version startup outside checkout
+and all seven provider HTTP suites passed with host PHP configuration disabled.
+CLI archive SHA-256:
+`d3d753799d12d2564d1e4ce2ff5709be0c96f08e8453d44386169cc49c2e4aad`.
+Consumer lock SHA-256:
+`f68c468c1f5f5a32b2b203e57431b597618e899eb65e210940e4b36343c46360`.
+This remains unreleased integration evidence and does not verify live deployment.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
