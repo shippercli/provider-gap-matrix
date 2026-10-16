@@ -565,3 +565,25 @@ Consumer lock SHA-256: `620f2e99c96d1f51505d8f6af29ee3acb462fdb24d7d209911d30ef9
 Separately, [cPanel PR #27](https://github.com/shippercli/provider-cpanel/pull/27) at `6cea43062bd86117cacf727a4afee95742e3fc2a` restricts saved Git tasks and retrieved deployment status records to summaries, removing commands and output. Its public-status regression failed before the change; 45 local tests / 216 assertions pass, and GitHub PHP 8.3–8.5 jobs pass. cPanel was not included in this six-package consumer.
 
 Remaining limits: local fixtures do not prove live provider behavior, database connectivity, durable recovery after partial provisioning, concurrency safety, or queued deployment completion correlation for Ploi/EasyPanel. Other cPanel status sections retain existing behavior. No PRs were merged and no live resources were changed during this verification.
+
+
+## Production consumer refresh after EasyPanel environment fixes
+
+The 16 October audit was repeated with the following exact committed candidates. These remain unmerged, unreleased versions.
+
+| Package | Commit |
+| --- | --- |
+| provider-forge | `0cf66004deb328aedf28e3da590f4ebf21c792ce` |
+| provider-ploi | `4ea0d6f5d2bf33a6a098cc68b6b7cefa9cf9930a` |
+| provider-easypanel | `7810a466f0a4cb97240886fbf90522e541400483` |
+| provider-coolify | `36ffadd5e835a7354ac54167ebf004b4952d7370` |
+| cli | `e16ba2b58b643e2de0272fe665d03f201db811ed` |
+| contracts | `fe08db9199dd473d8de494dfa230fa53fc8bb446` |
+
+A fresh ZIP-based Composer installation with no development dependencies, plugins or scripts passed runtime loading (27 classes), contract reflection (12 types), all four CLI provider adapters, empty-project configuration loading, and CLI startup under the PHP `-n` wrapper. All nine HTTP suites passed, including the six EasyPanel final-write/readback scenarios. Fixture PHP/Python files matched their committed provider heads. The same contracts compatibility alias described above was used.
+
+Fresh Composer audit of the resolved consumer lockfile reports no advisories or abandoned packages. Lock SHA-256: `9de737f2af54fa15c81c0ce86d7de987aba3c9bf5a2a34c74e5b26501068a1db`. Local evidence directory: `/var/folders/hs/hh8zts3j2bx_m9649bfhwkc40000gn/T/shipper-production-verified-fyaamyso` (source/archive manifest, verification results, security audit and installation log).
+
+EasyPanel now persists and verifies each confirmed database connection before creating another database, and verifies all expected variables after the final app update. Public-flow unit tests cover fresh-provider retry and refused readback; real HTTP covers final-write scenarios, with a negative control proving detection when verification is disabled. Worker/scheduler environment readback, durable crash recovery, ambiguous creation outcomes and live connectivity remain unresolved. cPanel was not installed in this consumer.
+
+Additional independently checked candidates: website Markdown sanitization and reserved section-name navigation fixes; cPanel status/runtime summaries integrated locally with 755 tests / 3,371 assertions and four HTTP suites plus 27 archive tests; Python and Ruby dependency audit CI gates. These do not establish live account readiness or complete the overall audit.
