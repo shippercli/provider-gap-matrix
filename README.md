@@ -125,6 +125,29 @@ replace deployment checks or establish that a release already contains these
 changes. Individual provider CI also checks PHP 8.3 and 8.5; the fresh combined
 consumer install has not been repeated on those versions.
 
+### Refreshed consumer verification after Forge and Ploi fixes
+
+On 2026-10-16, a new consumer with no pre-existing lockfile or vendor directory
+installed fresh local Forge (`77d7d034c643d0f07a1ee479ff6120463c3d445c`)
+and Ploi (`f602b8b3a3f5dfa144e0ca9d442e5956a5bfb921`) Composer ZIPs alongside
+the retained CLI, EasyPanel and Coolify archives from the previous consumer.
+These remain unreleased audit sources; the retained packages were not rebuilt.
+
+Using PHP 8.4.15, the fresh solve installed 84 production packages with `--no-dev --no-plugins
+--no-scripts`, including contracts 1.2.0, Forge SDK 4.1.1, Ploi SDK 1.9.5 and
+Guzzle 7.15.5. With host PHP configuration disabled, all 27 provider runtime
+classes loaded from installed archives; PHPUnit, Pest, Mockery, Pint and PHPStan
+were absent from Composer metadata. The installed CLI discovered/adapted all
+four providers, loaded an empty project configuration, and ran version/help
+outside its checkout. All six provider HTTP suites passed against this installed
+dependency graph, including 213 Forge requests and 150 Ploi requests. The locked
+dependency audit reported no advisories.
+
+Lockfile SHA-256:
+`dbaa5666760a979522c52e387ba8a58a7c29a676d77804810da98ba05fef0043`.
+This is a fresh dependency/install integration check with synthetic local HTTP,
+not a live provider deployment, release installation, or proof of all workflows.
+
 ### Open correctness issues
 
 - [Credential delivery, contracts #3](https://github.com/shippercli/contracts/issues/3):
