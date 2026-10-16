@@ -189,11 +189,15 @@ failing. GitHub reported all 53 heads mergeable without conflicts. There were
 later commits.
 
 Twenty-two PRs reported a blocked merge state: cPanel #8–#25 and #27, contracts
-#5 and #7, and capability-spec #2. In cPanel, branch protection requires
-`CI / PHP 8.3`, `CI / PHP 8.4` and `CI / PHP 8.5`, while the older PR workflows
-report `PHP 8.3`, `PHP 8.4` and `PHP 8.5`. The existing one-line
-[cPanel #26](https://github.com/shippercli/provider-cpanel/pull/26) reports all
-three required contexts successfully and has a clean merge state. The analogous
+#5 and #7, and capability-spec #2. Fifteen are drafts, so their blocked state
+does not by itself indicate a required-check failure. The seven non-draft PRs
+are cPanel #9, #10, #17–#19 and #27, plus contracts #7. Their exact-head checks
+report `PHP 8.3`, `PHP 8.4` and `PHP 8.5`; the ready workflow corrections in
+cPanel #26 and contracts #6 report `CI / PHP 8.3`, `CI / PHP 8.4` and
+`CI / PHP 8.5`. This is consistent with check-name mismatch on those seven PRs,
+but the integration cannot inspect branch protection directly (403). The
+existing one-line [cPanel #26](https://github.com/shippercli/provider-cpanel/pull/26)
+reports all three required contexts successfully and has a clean merge state. The analogous
 [contracts #6](https://github.com/shippercli/contracts/pull/6) and
 [capability-spec #3](https://github.com/shippercli/provider-capability-spec/pull/3)
 corrections are also ready with clean merge states. Review those base workflow
