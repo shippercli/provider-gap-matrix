@@ -543,3 +543,25 @@ They should avoid implying:
 - PHP-only deployments
 - Git-required workflows
 - panel-only infrastructure support
+
+
+## Production consumer verification — 16 October 2026
+
+An isolated Composer consumer installed six committed audit candidates from ZIP archives with `--no-dev --no-plugins --no-scripts`. Archive inspection excluded vendor, development tests, CI configuration and environment/authentication files. PHP ran with `-n` through the consumer wrapper. These are unmerged candidates, not released versions.
+
+| Package | Verified commit |
+| --- | --- |
+| provider-forge | `0cf66004deb328aedf28e3da590f4ebf21c792ce` |
+| provider-ploi | `4ea0d6f5d2bf33a6a098cc68b6b7cefa9cf9930a` |
+| provider-easypanel | `54b19e235a1cda4bb6dbb9bd6d50720c73fffbfa` |
+| provider-coolify | `36ffadd5e835a7354ac54167ebf004b4952d7370` |
+| cli | `e16ba2b58b643e2de0272fe665d03f201db811ed` |
+| contracts | `fe08db9199dd473d8de494dfa230fa53fc8bb446` |
+
+Passed: 27 production runtime classes, 12 contract types, discovery/adaptation of all four installed providers, empty project configuration loading, CLI startup, and eight HTTP fixture suites (Forge, Ploi, EasyPanel, and five Coolify suites including status privacy). Fixtures were checked byte-for-byte against their committed source heads. Contracts used a `dev-audit as 1.2.0` compatibility alias for this consumer fixture.
+
+Consumer lock SHA-256: `620f2e99c96d1f51505d8f6af29ee3acb462fdb24d7d209911d30ef9a946a8d6`. Local machine evidence: `/var/folders/hs/hh8zts3j2bx_m9649bfhwkc40000gn/T/shipper-production-verified-ydvfoofq` (`evidence.json`, `verification-results.json`, `install.log`). The temporary path is evidence location, not a portable reproduction command.
+
+Separately, [cPanel PR #27](https://github.com/shippercli/provider-cpanel/pull/27) at `6cea43062bd86117cacf727a4afee95742e3fc2a` restricts saved Git tasks and retrieved deployment status records to summaries, removing commands and output. Its public-status regression failed before the change; 45 local tests / 216 assertions pass, and GitHub PHP 8.3–8.5 jobs pass. cPanel was not included in this six-package consumer.
+
+Remaining limits: local fixtures do not prove live provider behavior, database connectivity, durable recovery after partial provisioning, concurrency safety, or queued deployment completion correlation for Ploi/EasyPanel. Other cPanel status sections retain existing behavior. No PRs were merged and no live resources were changed during this verification.
