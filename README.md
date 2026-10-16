@@ -372,6 +372,10 @@ query; check conclusions below are confirmed for the exact commits listed.
   three currently open Dependabot alerts in `examples/api/composer.lock`, but
   those alerts remain open until the PR is merged. Website #11 has exact-head
   CI and Vercel success; no website Dependabot alerts are currently open.
+- An organization-wide Dependabot alert query returned those three CLI alerts
+  and no open alerts for the other repositories where alert status was
+  readable. Dependabot alerts are disabled on all nine private repositories,
+  so their dependency state cannot be confirmed from this audit integration.
 - Forge #9 (`a5d1953`), EasyPanel #14 (`ad51f9a`), Ploi #26 (`f8751e0`), and
   Coolify #1 (`36ffadd`) are still drafts with clean checks. Their test and
   mocked-transport evidence does not establish live account behavior.
