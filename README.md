@@ -20,7 +20,7 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | --- | --- | --- | --- |
 | cPanel | Packagist [`1.2.1`](https://packagist.org/packages/shippercli/provider-cpanel#v1.2.1) | Validate, plan, apply, destroy, status, logs, rollback | Clean Composer and GitHub Action installs of v1.2.1 with CLI v1.0.4 deployed a raw HTML fixture and verified its content over trusted HTTPS. The v1.2.0 release commit passed the live interrupted-deploy retry check. |
 | Ploi | Tagged GitHub repository `1.0.1` via Composer VCS | Validate, plan, apply, destroy, status, logs | Tagged package installation verified. Live provider operations still require a disposable Ploi target. |
-| EasyPanel | Packagist [`2.0.1`](https://packagist.org/packages/shippercli/provider-easypanel#v2.0.1) | Validate, plan, apply, destroy, status, logs | Published v2.0.1 passed public Git deployments through Composer and the GitHub Action, with trusted HTTPS and verified cleanup. Published v2.0.0 passed the image fixture through both install paths. [Public Git results](https://github.com/shippercli/provider-easypanel/actions/runs/43236983784), [image results](https://github.com/shippercli/provider-easypanel/actions/runs/43231798018). |
+| EasyPanel | Packagist [`2.0.4`](https://packagist.org/packages/shippercli/provider-easypanel#v2.0.4) | Validate, plan, apply, destroy, status, logs | Published v2.0.4 with CLI v1.0.5 passed authenticated Redis deployment over trusted HTTPS and verified cleanup through Composer and the GitHub Action. Prior published runs verified [scheduled jobs](https://github.com/shippercli/provider-easypanel/actions/runs/43255251842), [public Git](https://github.com/shippercli/provider-easypanel/actions/runs/43236983784), and [image deploys](https://github.com/shippercli/provider-easypanel/actions/runs/43231798018). See the [Redis run](https://github.com/shippercli/provider-easypanel/actions/runs/43261762955). |
 | Forge | Source checkout | No stable package verified | Live provider operations still require a disposable Forge target. |
 | Coolify | Source checkout | No stable package verified | Live provider operations still require a disposable Coolify target. |
 
@@ -60,7 +60,7 @@ Legend:
 | PHP runtime configuration | Yes | No | Yes | No | Medium |
 | Custom NGINX configuration | Yes | No | No | No | Medium |
 | Queue / worker management | Yes | Yes | No | Yes | Low |
-| Daemon / process supervision | Yes | Yes | No | Yes | Medium |
+| Daemon / process supervision | Yes | Yes | No | No | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
 | App resource limits | No | No | No | No | High |
 | Service mounts | No | No | No | No | High |
