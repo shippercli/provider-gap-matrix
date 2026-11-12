@@ -20,7 +20,7 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | --- | --- | --- | --- |
 | cPanel | Packagist [`1.2.0`](https://packagist.org/packages/shippercli/provider-cpanel#v1.2.0) | Validate, plan, apply, destroy, status, logs, rollback | Version 1.2.0 deployed and served a raw HTML fixture through clean Composer and GitHub Action installs. The release commit passed the live interrupted-deploy retry check. |
 | Ploi | Tagged GitHub repository `1.0.1` via Composer VCS | Validate, plan, apply, destroy, status, logs | Tagged package installation verified. Live provider operations still require a disposable Ploi target. |
-| EasyPanel | Packagist `1.0.1` | Validate, plan, apply, destroy | Current source deployed the dedicated image demo and verified HTTPS. Stable status and logs await a new release. |
+| EasyPanel | Packagist [`2.0.0`](https://packagist.org/packages/shippercli/provider-easypanel#v2.0.0) | Validate, plan, apply, destroy, status, logs | Published v2.0.0 passed disposable deployments through [Composer](https://github.com/shippercli/provider-easypanel/actions/runs/43231219032/job/131226720750) and the [GitHub Action](https://github.com/shippercli/provider-easypanel/actions/runs/43231219032/job/131226720374), including trusted HTTPS and verified cleanup. |
 | Forge | Source checkout | No stable package verified | Live provider operations still require a disposable Forge target. |
 | Coolify | Source checkout | No stable package verified | Live provider operations still require a disposable Coolify target. |
 
