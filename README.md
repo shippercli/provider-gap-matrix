@@ -12,6 +12,21 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | Laravel Forge | Server panel | Laravel-oriented server deployments |
 | EasyPanel | App/server panel | Managed application and service deployments |
 | cPanel | Shared hosting panel | Shared hosting deployments |
+| Coolify | App/server panel | Self-managed container application deployments |
+
+## Distribution and verification
+
+| Provider | Stable installation | Stable CLI operations | Live deployment evidence |
+| --- | --- | --- | --- |
+| cPanel | Packagist `1.1.0` | Validate, plan, apply, destroy, status, logs, rollback | Raw HTML fixture deployed and served through both published install paths. Dedicated cPanel lifecycle and account-resource fixtures passed. |
+| Ploi | Tagged GitHub repository `1.0.1` via Composer VCS | Validate, plan, apply, destroy, status, logs | Tagged package installation verified. Live provider operations still require a disposable Ploi target. |
+| EasyPanel | Packagist `1.0.1` | Validate, plan, apply, destroy | Current source deployed the dedicated image demo and verified HTTPS. Stable status and logs await a new release. |
+| Forge | Source checkout | No stable package verified | Live provider operations still require a disposable Forge target. |
+| Coolify | Source checkout | No stable package verified | Live provider operations still require a disposable Coolify target. |
+
+The capability table below compares the original four providers at source level.
+See the [Coolify coverage notes](https://github.com/shippercli/provider-coolify#coverage)
+for its source-only capabilities.
 
 ## Coverage by deployment model
 
@@ -22,7 +37,7 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | Generic SSH / raw server | No | None | High |
 | PaaS app platform | No | None | High |
 | Frontend / static platform | No | None | High |
-| Container-native platform | No | None | High |
+| Container-native platform | Partial | Coolify (source), EasyPanel (image deployments) | Medium |
 | Kubernetes | No | None | High |
 | Preview-environment-first platform | No | None | Medium |
 
@@ -47,12 +62,12 @@ Legend:
 | Queue / worker management | Yes | Yes | No | Yes | Low |
 | Daemon / process supervision | Yes | Yes | No | Yes | Medium |
 | Cron / scheduled jobs | Yes | Yes | Yes | Yes | Low |
-| App resource limits | No | No | No | Yes | Medium |
-| Service mounts | No | No | No | Yes | Medium |
+| App resource limits | No | No | No | No | High |
+| Service mounts | No | No | No | No | High |
 | Preview environments | Partial | Partial | Partial | Partial | Medium |
 | Multi-service apps | No | No | No | Partial | High |
-| Container image deploys | No | No | No | Partial | High |
-| Rollbacks | Partial | No | Partial | No | High |
+| Container image deploys | No | No | No | Yes | High |
+| Rollbacks | No | No | Partial | No | High |
 | Logs / runtime status | Partial | Yes | Partial | Partial | Medium |
 
 ## Strategic observations
@@ -78,7 +93,6 @@ Legend:
 | Vercel | Frontend, static, edge workflows |
 | Railway | PaaS apps, workers, managed services |
 | Render | PaaS apps, web services, cron jobs |
-| Coolify | Self-managed modern app platform |
 | Kubernetes | Portable orchestration layer |
 
 ## Messaging implication
