@@ -18,15 +18,15 @@ Map current provider coverage, identify missing deployment models, and clarify w
 
 | Provider | Stable installation | Stable CLI operations | Live deployment evidence |
 | --- | --- | --- | --- |
-| cPanel | Packagist [`1.2.1`](https://packagist.org/packages/shippercli/provider-cpanel#v1.2.1) | Validate, plan, apply, destroy, status, logs, rollback | Clean Composer and GitHub Action installs of v1.2.1 with CLI v1.0.4 deployed a raw HTML fixture and verified its content over trusted HTTPS. The v1.2.0 release commit passed the live interrupted-deploy retry check. |
-| Ploi | Tagged GitHub repository `1.0.1` via Composer VCS | Validate, plan, apply, destroy, status, logs | Tagged package installation verified. Live provider operations still require a disposable Ploi target. |
+| cPanel | Packagist [`1.2.2`](https://packagist.org/packages/shippercli/provider-cpanel#v1.2.2) | Validate, plan, apply, destroy, status, logs, rollback | Clean Composer and GitHub Action installs of v1.2.2 with CLI v1.0.5 validated, planned, deployed, and checked a live raw HTML fixture. The v1.2.0 release commit passed the live interrupted-deploy retry check. |
+| Ploi | [`2.0.0`](https://github.com/shippercli/provider-ploi/releases/tag/v2.0.0) via Composer's Git driver | Validate, plan, apply, destroy, status, logs | Clean Composer installation with CLI v1.0.5 verified. Live operations require a disposable Ploi target. |
 | EasyPanel | Packagist [`2.0.4`](https://packagist.org/packages/shippercli/provider-easypanel#v2.0.4) | Validate, plan, apply, destroy, status, logs | Published v2.0.4 with CLI v1.0.5 deployed a Redis fixture through Composer and the GitHub Action. Both verified an authenticated Redis PING through the app over trusted HTTPS and confirmed cleanup. Prior published runs verified [scheduled jobs](https://github.com/shippercli/provider-easypanel/actions/runs/43255251842), [public Git](https://github.com/shippercli/provider-easypanel/actions/runs/43236983784), and [image deploys](https://github.com/shippercli/provider-easypanel/actions/runs/43231798018). See the [Redis run](https://github.com/shippercli/provider-easypanel/actions/runs/43261762955). |
-| Forge | Source checkout | No stable package verified | Live provider operations still require a disposable Forge target. |
-| Coolify | Source checkout | No stable package verified | Live provider operations still require a disposable Coolify target. |
+| Forge | [`1.0.0`](https://github.com/shippercli/provider-forge/releases/tag/v1.0.0) via Composer's Git driver | Validate, plan, apply, destroy, status, logs | Clean Composer installation with CLI v1.0.5 verified. Live operations require a disposable Forge target. |
+| Coolify | [`1.0.0`](https://github.com/shippercli/provider-coolify/releases/tag/v1.0.0) via Composer's Git driver | Validate, plan, apply, destroy, status, logs, rollback | Clean Composer installation with CLI v1.0.5 and example configuration validation verified. Live operations require a disposable Coolify target. |
 
 The capability table below compares the original four providers at source level.
-See the [Coolify coverage notes](https://github.com/shippercli/provider-coolify#coverage)
-for its source-only capabilities.
+See the [Coolify coverage notes](https://github.com/shippercli/provider-coolify/tree/v1.0.0#coverage)
+for the tagged release's capabilities and limitations.
 
 ## Coverage by deployment model
 
@@ -37,7 +37,7 @@ for its source-only capabilities.
 | Generic SSH / raw server | No | None | High |
 | PaaS app platform | No | None | High |
 | Frontend / static platform | No | None | High |
-| Container-native platform | Partial | Coolify (source), EasyPanel (image and public Git deployments) | Medium |
+| Container-native platform | Partial | Coolify, EasyPanel (image and public Git deployments) | Medium |
 | Kubernetes | No | None | High |
 | Preview-environment-first platform | No | None | Medium |
 
