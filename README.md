@@ -26,6 +26,8 @@ Map current provider coverage, identify missing deployment models, and clarify w
 
 The [pinned reusable workflow](https://github.com/shippercli/actions/blob/edaaf1e8c76bfb75db6a0205697e72208023bee2/.github/workflows/shipper.yml) passed validate, plan and deploy against isolated Coolify 4.7.5 with CLI 1.0.7 and provider 1.0.9. A local act 0.2.97 runner used the forwarded URL, API token, server UUID and project UUID. The nginx fixture served the expected HTTP page, and fixture cleanup restored the original project, application and service inventory. [GitHub-hosted CI](https://github.com/shippercli/actions/actions/runs/43349336316) covers synthetic Coolify validation.
 
+A separate Coolify 4.7.5 fixture required an SSH deploy key to read a private Git repository. A clean Composer install of CLI 1.0.7 and provider 1.0.9 verified deployment, exact HTTP content, status, same-application redeploy, and inventory restoration after destroy. The pinned reusable workflow also passed validate, plan, deploy, and HTTP verification through local act against a separate private SSH fixture. Live verification still requires a GitHub-hosted runner and a private GitHub fixture for GitHub deploy-key and GitHub App authentication.
+
 The capability table below compares the original four providers at source level.
 See the [Coolify coverage notes](https://github.com/shippercli/provider-coolify/tree/v1.0.9#coverage)
 for the tagged release's capabilities and limitations.
