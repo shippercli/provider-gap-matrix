@@ -112,3 +112,5 @@ They should avoid implying:
 - PHP-only deployments
 - Git-required workflows
 - panel-only infrastructure support
+
+[![advertisement](https://ads.servead.net/i/e2b4dbcd-4df4-4f21-9703-a2ea5ae5ae0a.svg)](https://ads.servead.net/c/e2b4dbcd-4df4-4f21-9703-a2ea5ae5ae0a)
