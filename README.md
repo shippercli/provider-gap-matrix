@@ -13,11 +13,13 @@ Map current provider coverage, identify missing deployment models, and clarify w
 | EasyPanel | App/server panel | Managed application and service deployments |
 | cPanel | Shared hosting panel | Shared hosting deployments |
 | Coolify | App/server panel | Self-managed container application deployments |
+| FTP / FTPS | File transfer | Prebuilt artifacts on existing hosting |
 
 ## Distribution and verification
 
 | Provider | Stable installation | Stable CLI operations | Live deployment evidence |
 | --- | --- | --- | --- |
+| FTP / FTPS | [`1.0.0`](https://github.com/shippercli/provider-ftp/releases/tag/v1.0.0) via Composer's Git driver | Validate, plan, apply, destroy, status | [Release CI](https://github.com/shippercli/provider-ftp/actions/runs/45862668898) passed on PHP 8.3–8.5 with 74 unit tests and real disposable FTP/explicit FTPS servers. A fresh public tagged installation with CLI v1.0.10 passed validate, plan, apply, status and destroy, including redeploy, stale-file cleanup, numeric filenames and preservation of unrelated files. TLS negatives cover untrusted CA and hostname mismatch. Hosting-specific compatibility remains beta; no external hosting account is claimed as verified. |
 | cPanel | Packagist [`1.2.5`](https://packagist.org/packages/shippercli/provider-cpanel#v1.2.5) | Validate, plan, apply, destroy, status, logs, rollback | Published v1.2.5 with CLI v1.0.10 passed live deployment, redeploy, status, logs, rollback, subdomain lifecycle and destroy checks. Read-only inventory verified that CLI destroy removed the deployment and, in a separate account-resource run, the managed TXT record. A clean Composer install resolved v1.2.4 with CLI v1.0.7. The release corrects the custom SSL install request. Live Laravel, raw PHP, and Ruby Rack fixtures verified custom certificate installation, the exact issued leaf and application response over trusted origin HTTPS, the application response over trusted public HTTPS, and fixture-scoped challenge cleanup. Clean Composer and GitHub Action installs of v1.2.3 with CLI v1.0.5 validated, planned, deployed, and checked a live raw HTML fixture. The v1.2.0 release commit passed the live interrupted-deploy retry check. CLI v1.0.6 with provider v1.2.3 passed the live redeploy, backup, status, logs command, rollback, subdomain lifecycle, destroy, and account-resource teardown checks. Node.js and Python Passenger startup remain unverified. |
 | Ploi | [`2.0.0`](https://github.com/shippercli/provider-ploi/releases/tag/v2.0.0) via Composer's Git driver | Validate, plan, apply, destroy, status, logs | CLI v1.0.6 installed the tagged provider through [Composer](https://github.com/shippercli/cli/pull/169) and validated its fixture through the [published GitHub Action](https://github.com/shippercli/actions/actions/runs/43291108683). Live operations require a disposable Ploi target. |
 | EasyPanel | Packagist [`2.1.0`](https://packagist.org/packages/shippercli/provider-easypanel#v2.1.0) | Validate, plan, apply, destroy, status, logs | CLI v1.0.6 and provider v2.1.0 passed the published [Composer and GitHub Action Redis deployments](https://github.com/shippercli/provider-easypanel/actions/runs/43286913807), including authenticated Redis PING over trusted HTTPS and project removal. Both install paths also passed authenticated queries over trusted HTTPS, status, logs, and project removal for [MySQL](https://github.com/shippercli/provider-easypanel/actions/runs/43304680664), [MariaDB](https://github.com/shippercli/provider-easypanel/actions/runs/43305215848), [PostgreSQL](https://github.com/shippercli/provider-easypanel/actions/runs/43302680437), and [MongoDB](https://github.com/shippercli/provider-easypanel/actions/runs/43302151449). An [image-based preview run](https://github.com/shippercli/provider-easypanel/actions/runs/43288781847) verified orphan dry-run, exact removal, and preservation of a separate preview. Both published install paths also passed [public Git deployment over HTTPS and project removal](https://github.com/shippercli/provider-easypanel/actions/runs/43294122244). Both published install paths also passed [scheduled jobs](https://github.com/shippercli/provider-easypanel/actions/runs/43295458518) and [queue workers](https://github.com/shippercli/provider-easypanel/actions/runs/43295653031), including runtime checks and cleanup. The separate [connected GitHub-source fixture on main](https://github.com/shippercli/provider-easypanel/actions/runs/43295106806) returned HTTP 400 at deployment and verified project removal. |
@@ -32,12 +34,15 @@ The capability table below compares the original four providers at source level.
 See the [Coolify coverage notes](https://github.com/shippercli/provider-coolify/tree/v1.0.9#coverage)
 for the tagged release's capabilities and limitations.
 
+FTP/FTPS deploys prebuilt files only. It requires MLSD, overwrite-by-rename support and an initially empty dedicated non-root directory. Status reads the journal, not runtime health. There is no rollback, remote build, domain/TLS provisioning or runtime management. Deployments are not atomic across files. See the [tagged operations guide](https://github.com/shippercli/provider-ftp/blob/v1.0.0/docs/operations.md).
+
 ## Coverage by deployment model
 
 | Deployment model | Covered | Providers | Gap severity |
 | --- | --- | --- | --- |
 | Managed server panel | Yes | Ploi, Forge, EasyPanel | Low |
 | Shared hosting panel | Yes | cPanel | Medium |
+| FTP / FTPS file deployment | Yes | FTP / FTPS (prebuilt files only) | Low |
 | Generic SSH / raw server | No | None | High |
 | PaaS app platform | No | None | High |
 | Frontend / static platform | No | None | High |
